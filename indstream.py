@@ -19,14 +19,19 @@ st.title('Análise de Atrito na Organização de Marketing')
 # Subtítulo
 st.subheader('Razões para saída dos funcionários')
 
-# Mostrando o DataFrame
-st.dataframe(df)
+# Adicionando um seletor de gráfico
+chart_type = st.selectbox('Selecione o tipo de gráfico', ['Barra', 'Linha', 'Área'])
 
-# Gráfico de barras
-st.bar_chart(df)
+# Adicionando um seletor de colunas
+selected_columns = st.multiselect('Selecione as colunas para visualizar', df.columns)
 
-# Gráfico de linhas
-st.line_chart(df)
+# Mostrando o DataFrame com base nas colunas selecionadas
+st.dataframe(df[selected_columns])
 
-# Gráfico de área
-st.area_chart(df)
+# Exibindo o gráfico escolhido
+if chart_type == 'Barra':
+    st.bar_chart(df[selected_columns])
+elif chart_type == 'Linha':
+    st.line_chart(df[selected_columns])
+elif chart_type == 'Área':
+    st.area_chart(df[selected_columns])
